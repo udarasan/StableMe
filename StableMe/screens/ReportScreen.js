@@ -4,6 +4,7 @@ import { Container, Header, Left, Body, Right, Title } from 'native-base';
 
 
 export default class ReportScreen extends Component {
+    
     render() {
         return (
             <Header style={styles.Header}>

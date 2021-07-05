@@ -4,8 +4,8 @@ import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Rig
 import { color } from 'react-native-reanimated';
 import DefultScreen from './DefultScreen';
 import SignUpScreen from './SignUpScreen';
-import ReportScreen  from './ReportScreen';
-
+import ReportScreen from './ReportScreen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 export default class LoginScreen extends Component {
 
     constructor(props) {
@@ -14,8 +14,39 @@ export default class LoginScreen extends Component {
             nic: '',
             password: ''
         }
+        this.getData()
     }
 
+    storeData = async (value) => {
+        try {
+            await AsyncStorage.setItem('isLogged', null)
+            console.log(value)
+        } catch (e) {
+            // saving error
+        } 
+    }
+    getData = async () => {
+        try {
+            const value = await AsyncStorage.getItem('isLogged')
+            if (value !== null) {
+                console.log(value)
+                this.props.navigation.navigate(DefultScreen)
+            }else{
+                
+            }
+        } catch (e) {
+
+        }
+    }
+    removeValue = async () => {
+        try {
+          await AsyncStorage.removeItem('isLogged')
+        } catch(e) {
+          // remove error
+        }
+      
+        console.log('Done.')
+      }
     getUser = () => {
         fetch('http://192.168.1.113:3000/user/oneuser/' + this.state.nic, { method: 'GET' })
             .then((response) => response.json())
@@ -25,8 +56,10 @@ export default class LoginScreen extends Component {
 
     passwordMatch(password) {
         if (this.state.password == password) {
-            console.log('wade goda')   
-            this.props.navigation.navigate(DefultScreen)   
+            console.log('wade goda')
+            this.storeData()
+            this.props.navigation.navigate(DefultScreen)
+
         } else {
             console.log('nop')
         }

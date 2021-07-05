@@ -7,10 +7,13 @@ import ForgotPSWScreen from './screens/ForgotPSWScreen'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import ReportScreen from './screens/ReportScreen'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const Stack = createStackNavigator();
 
 export default class App extends Component {
+
+  
   render() {
     return (
       

@@ -1,27 +1,62 @@
 import React, { Component } from 'react'
-import { View,StyleSheet,StatusBar } from 'react-native'
-import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text, Item, Input } from 'native-base';
+import { View, StyleSheet, StatusBar } from 'react-native'
+import { Container, Header, Title, Content, Footer, FooterTab, ActionSheet, DatePicker, Button, Left, Right, Body, Icon, Text, Item, Input, ListItem, CheckBox } from 'native-base';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import LoginScreen from './LoginScreen';
+import DefultScreen from './DefultScreen';
 
 export default class RecordScreen extends Component {
+    constructor(props) {
+        super()
+        this.state = {
+            
+        }
+    }
+
+    removeValue = async () => {
+        try {
+            await AsyncStorage.removeItem('isLogged')
+            
+        } catch (e) {
+            // remove error
+        }
+        console.log('Done.')
+    }
     render() {
         return (
             <View>
-            <Header style={styles.Header}>
+                <Header style={styles.Header}>
                     <StatusBar backgroundColor="#16DB65" />
                     <Body>
                         <Title style={styles.Title}>Record Screen</Title>
                     </Body>
                 </Header>
+
                 <Item rounded style={styles.InputFeilds}>
-                <Input placeholder='National ID' style={styles.New} />
-            </Item>
-            <Item rounded style={styles.InputFeilds}>
-                <Input placeholder='Password' style={styles.New} />
-            </Item>
-            <Button style={styles.Button}>
-                <Text style={styles.ButtonText}> Login </Text>
-            </Button>
+                    <Input placeholder='Amount' style={styles.New} />
+                </Item>
+                <Item rounded style={styles.InputFeilds}>
+                    <Input placeholder='Description' style={styles.New} />
+                </Item>
+
+
+
+                <Button style={styles.Button}
+                    onPress={()=>{
+                        this.removeValue();
+                    }}
+                >
+
+                </Button>
+
+
+
+
+
+
             </View>
+
         )
     }
 }
