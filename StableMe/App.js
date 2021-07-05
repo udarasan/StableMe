@@ -13,19 +13,26 @@ const Stack = createStackNavigator();
 
 export default class App extends Component {
 
-  
+  constructor(props) {
+    super()
+    this.state = {
+    }
+
+  }
+
   render() {
     return (
-      
+
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }}/>
-          <Stack.Screen name="DefultScreen" component={DefultScreen} options={{ headerShown: false }}/>
-          <Stack.Screen name="SignUpScreen" component={SignUpScreen}  options={{ headerShown: false }}/>
-          <Stack.Screen name="ReportScreen" component={ReportScreen}  options={{ headerShown: false }}/>
+          <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="DefultScreen" component={DefultScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="SignUpScreen" component={SignUpScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="ReportScreen" component={ReportScreen} options={{ headerShown: false }} />
         </Stack.Navigator>
       </NavigationContainer>
 
     )
   }
+
 }

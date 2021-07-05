@@ -19,7 +19,7 @@ export default class LoginScreen extends Component {
 
     storeData = async (value) => {
         try {
-            await AsyncStorage.setItem('isLogged', null)
+            await AsyncStorage.setItem('isLogged', 'yes')
             console.log(value)
         } catch (e) {
             // saving error
