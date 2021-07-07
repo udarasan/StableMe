@@ -9,15 +9,18 @@ import ReportScreen from './ReportScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import ExpensesScren from './ExpensesScren';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Tab = createBottomTabNavigator();
 
 export default class DefultScreen extends Component {
+    
     render() {
+        
+        
         return (
             
-           
+          
             <Tab.Navigator tabBarOptions={{
                 showLabel: false,
                 style: {
@@ -31,6 +34,7 @@ export default class DefultScreen extends Component {
                             <View style={styles.root}>
                                  <Icon type="FontAwesome" name="align-center" style={{ color: focused ? 'black' : 'white' }} />
                                 <Text style={{ color: focused ? 'black' : 'white',fontSize:15 }}>Report</Text>
+                                
                             </View>
                         ),
                     }

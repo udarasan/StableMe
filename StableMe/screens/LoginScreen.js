@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, StatusBar, KeyboardAvoidingView } from 'react-native';
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text, Item, Input } from 'native-base';
-import { color } from 'react-native-reanimated';
+import { color, Value } from 'react-native-reanimated';
 import DefultScreen from './DefultScreen';
 import SignUpScreen from './SignUpScreen';
 import ReportScreen from './ReportScreen';
@@ -21,7 +21,7 @@ export default class LoginScreen extends Component {
     storeData = async (value) => {
         try {
             await AsyncStorage.setItem('isLogged', this.state.nic)
-            console.log(value)
+            console.log('Store Data :' + value)
         } catch (e) {
             // saving error
         }
@@ -30,8 +30,9 @@ export default class LoginScreen extends Component {
         try {
             const value = await AsyncStorage.getItem('isLogged')
             if (value !== null) {
-                console.log(value)
+                console.log('getData :' + value)
                 this.props.navigation.navigate(DefultScreen)
+
             } else {
 
             }
@@ -59,12 +60,8 @@ export default class LoginScreen extends Component {
         if (this.state.password == password) {
             console.log('wade goda')
             this.storeData()
-            //this.props.navigation.navigate(DefultScreen)
-           
-            this.props.navigation.navigate('ReportScreen',{nic:"hello"})
-                 
-           
-        
+            this.props.navigation.navigate(DefultScreen)
+            //this.props.navigation.navigate('ReportScreen',{nic:this.state.nic})
 
         } else {
             console.log('nop')
@@ -77,6 +74,7 @@ export default class LoginScreen extends Component {
     }
 
     render() {
+
         return (
 
             <View>
@@ -127,7 +125,7 @@ export default class LoginScreen extends Component {
 
                 <Button style={styles.Button}
                     onPress={this.getSignup}
-                    //onPress={()=>this.props.navigation.navigate('ReportScreen',{nic:"hello"})}
+                //onPress={()=>this.props.navigation.navigate('ReportScreen',{nic:"hello"})}
 
                 >
                     <Text style={styles.ButtonText}> sign </Text>
