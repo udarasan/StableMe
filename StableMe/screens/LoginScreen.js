@@ -6,6 +6,7 @@ import DefultScreen from './DefultScreen';
 import SignUpScreen from './SignUpScreen';
 import ReportScreen from './ReportScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 export default class LoginScreen extends Component {
 
     constructor(props) {
@@ -19,11 +20,11 @@ export default class LoginScreen extends Component {
 
     storeData = async (value) => {
         try {
-            await AsyncStorage.setItem('isLogged', 'yes')
+            await AsyncStorage.setItem('isLogged', this.state.nic)
             console.log(value)
         } catch (e) {
             // saving error
-        } 
+        }
     }
     getData = async () => {
         try {
@@ -31,8 +32,8 @@ export default class LoginScreen extends Component {
             if (value !== null) {
                 console.log(value)
                 this.props.navigation.navigate(DefultScreen)
-            }else{
-                
+            } else {
+
             }
         } catch (e) {
 
@@ -40,13 +41,13 @@ export default class LoginScreen extends Component {
     }
     removeValue = async () => {
         try {
-          await AsyncStorage.removeItem('isLogged')
-        } catch(e) {
-          // remove error
+            await AsyncStorage.removeItem('isLogged')
+        } catch (e) {
+            // remove error
         }
-      
+
         console.log('Done.')
-      }
+    }
     getUser = () => {
         fetch('http://192.168.1.113:3000/user/oneuser/' + this.state.nic, { method: 'GET' })
             .then((response) => response.json())
@@ -58,13 +59,23 @@ export default class LoginScreen extends Component {
         if (this.state.password == password) {
             console.log('wade goda')
             this.storeData()
-            this.props.navigation.navigate(DefultScreen)
+            //this.props.navigation.navigate(DefultScreen)
+           
+            this.props.navigation.navigate('ReportScreen',{nic:"hello"})
+                 
+           
+        
 
         } else {
             console.log('nop')
         }
 
     }
+
+    getSignup = () => {
+        this.props.navigation.navigate(SignUpScreen)
+    }
+
     render() {
         return (
 
@@ -113,6 +124,15 @@ export default class LoginScreen extends Component {
                 >
                     <Text style={styles.ButtonText}> Login </Text>
                 </Button>
+
+                <Button style={styles.Button}
+                    onPress={this.getSignup}
+                    //onPress={()=>this.props.navigation.navigate('ReportScreen',{nic:"hello"})}
+
+                >
+                    <Text style={styles.ButtonText}> sign </Text>
+                </Button>
+
                 <Text style={styles.NormalText}> Forgot Password </Text>
             </View>
 

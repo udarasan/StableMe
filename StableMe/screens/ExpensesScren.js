@@ -12,14 +12,13 @@ export default class ExpensesScren extends Component {
                         <Title style={styles.Title}>Exchanges List</Title>
                     </Body>
             </Header>
+
             <Content>
             <List>
               <ListItem avatar>
-                <Left>
-                  <Thumbnail source={{ uri: 'Image URL' }} />
-                </Left>
                 <Body>
                   <Text>Kumar Pratik</Text>
+                  <Text note>category</Text>
                   <Text note>Doing what you like will always keep you happy . .</Text>
                 </Body>
                 <Right>
