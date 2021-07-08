@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, StatusBar } from 'react-native'
-import { Container, Header, Content, Footer, FooterTab, Button, Body, Title, Icon, Text } from 'native-base';
+import { Card, CardItem, Container, Header, Content, Footer, FooterTab, Button, Body, Title, Icon, Text } from 'native-base';
 import LoginScreen from './LoginScreen';
 
 
@@ -8,11 +8,17 @@ export default class ReportScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            nic: ''
+            nic: '',
+            name: '',
+
         }
     }
     passNICToAnotherScreen(pass) {
-        console.log(pass+" - pass data");
+        console.log(pass + " - pass data");
+        fetch('http://192.168.1.113:3000/user/oneuser/' + pass, { method: 'GET' })
+            .then((response) => response.json())
+            .then((json) => console.log(json))
+            
     }
     componentDidMount() {
 
@@ -20,7 +26,7 @@ export default class ReportScreen extends Component {
     }
     render() {
         const { nic } = this.props.route.params
-        
+
         return (
             <Container>
 
@@ -31,17 +37,30 @@ export default class ReportScreen extends Component {
                     </Body>
                 </Header>
                 <Content>
-                    <Text>{nic}</Text>
+                    
+                    <Card style={styles.Card}>
+                        <CardItem style={styles.CardItem}>
+                            <Body>
+                                <Text>
+                                    Your ID : {nic}
+                                </Text>
+                                <Text style={styles.Welcome}>
+                                    Hello There! Welcome To Statble Me
+                                </Text>
+                            </Body>
+                        </CardItem>
+                    </Card>
+
                 </Content>
                 <Footer >
                     <FooterTab style={styles.Footer}>
-                        <Button vertical onPress={() => this.props.navigation.navigate('ReportScreen'),this.passNICToAnotherScreen(nic)}>
+                        <Button vertical onPress={() => this.props.navigation.navigate('ReportScreen'), this.passNICToAnotherScreen(nic)}>
                             <Icon name="apps" style={styles.Icon} />
                             <Text style={styles.Icon}>Report</Text>
                         </Button>
                         <Button vertical onPress={() => this.props.navigation.navigate('ExpensesScren', { nic: nic })}>
-                            <Icon name="camera" style={styles.Icon} />
-                            <Text style={styles.Icon}>Expenses</Text>
+                            <Icon name="expand" style={styles.Icon} />
+                            <Text style={styles.Icon}>Exchange</Text>
                         </Button>
                         <Button vertical onPress={() => this.props.navigation.navigate('RecordScreen', { nic: nic })}>
                             <Icon name="navigate" style={styles.Icon} />
@@ -83,5 +102,21 @@ const styles = StyleSheet.create({
     Icon: {
 
         color: '#fff',
+    },
+    CardItem: {
+        
+       
+
+    },
+    Card:{
+        borderRadius: 10,
+        color: '#fff',
+        borderWidth:1,
+        height:100,
+        
+    },
+    Welcome:{
+        fontSize:25
     }
+
 })

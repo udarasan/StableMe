@@ -184,8 +184,8 @@ export default class RecordScreen extends Component {
                             <Text style={styles.Icon}>Apps</Text>
                         </Button>
                         <Button vertical onPress={()=>this.props.navigation.navigate('ExpensesScren',{nic:nic})}>
-                            <Icon name="camera" style={styles.Icon} />
-                            <Text style={styles.Icon}>Camera</Text>
+                            <Icon name="expand" style={styles.Icon} />
+                            <Text style={styles.Icon}>Exchange</Text>
                         </Button>
                         <Button vertical  onPress={()=>this.props.navigation.navigate('RecordScreen',{nic:nic})}>
                             <Icon  name="navigate"  style={styles.Icon}/>

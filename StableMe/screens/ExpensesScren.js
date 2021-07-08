@@ -91,8 +91,8 @@ export default class ExpensesScren extends Component {
                 <Text style={styles.Icon}>Report</Text>
               </Button>
               <Button vertical onPress={() => this.props.navigation.navigate('ExpensesScren', { nic: nic }), this.getData(nic)}>
-                <Icon name="camera" style={styles.Icon} />
-                <Text style={styles.Icon}>Expenses</Text>
+                <Icon name="expand" style={styles.Icon} />
+                <Text style={styles.Icon}>Exchange</Text>
               </Button>
               <Button vertical onPress={() => this.props.navigation.navigate('RecordScreen', { nic: nic })}>
                 <Icon name="navigate" style={styles.Icon} />

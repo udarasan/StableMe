@@ -19,7 +19,7 @@ export default class LoginScreen extends Component {
         this.getData()
     }
 
-    
+
     storeData = async (value) => {
         try {
             await AsyncStorage.setItem('isLogged', this.state.nic)
