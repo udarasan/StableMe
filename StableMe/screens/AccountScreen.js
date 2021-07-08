@@ -32,6 +32,7 @@ export default class AccountScreen extends Component {
     }
 
     render() {
+        const { nic } = this.props.route.params
         return (
             <Container>
 
@@ -42,7 +43,7 @@ export default class AccountScreen extends Component {
                     </Body>
                 </Header>
 
-                <Text  >  </Text>
+                
                 <Content>
 
                 </Content>
@@ -52,15 +53,15 @@ export default class AccountScreen extends Component {
                             <Icon name="apps" style={styles.Icon}/>
                             <Text style={styles.Icon}>Report</Text>
                         </Button>
-                        <Button vertical onPress={() => this.props.navigation.navigate('ExpensesScren', { nic: 'udara' })}>
+                        <Button vertical onPress={() => this.props.navigation.navigate('ExpensesScren', { nic: nic })}>
                             <Icon name="camera" style={styles.Icon} />
                             <Text style={styles.Icon}>Expenses</Text>
                         </Button>
-                        <Button vertical onPress={() => this.props.navigation.navigate('RecordScreen', { nic: 'udara' })}>
+                        <Button vertical onPress={() => this.props.navigation.navigate('RecordScreen', { nic: nic })}>
                             <Icon  name="navigate" style={styles.Icon} />
                             <Text style={styles.Icon}>Record</Text>
                         </Button>
-                        <Button vertical onPress={() => this.props.navigation.navigate('AccountScreen', { nic: 'udara' })}>
+                        <Button vertical onPress={() => this.props.navigation.navigate('AccountScreen', { nic: nic })}>
                             <Icon name="person"  style={styles.Icon}/>
                             <Text style={styles.Icon}>Account</Text>
                         </Button>

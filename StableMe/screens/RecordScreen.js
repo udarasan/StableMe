@@ -62,12 +62,12 @@ export default class RecordScreen extends Component {
         console.log('Done.')
 
     }
-    addDailyRecord() {
+    addDailyRecord(nic) {
         fetch('http://192.168.1.113:3000/exchange/saveexchange', {
             method: 'POST',
             body: JSON.stringify({
 
-                uid: this.state.uid,
+                uid: nic,
                 type: this.state.type,
                 category: this.state.category,
                 value: this.state.value,
@@ -83,11 +83,14 @@ export default class RecordScreen extends Component {
             .then((response) => response.json())
             .then((json) => console.log(json));
     }
-
+    passNICToAnotherScreen(pass) {
+        console.log(pass+" - pass data");
+        
+    }
 
     render() {
+        const { nic } = this.props.route.params
         return (
-
             <Container>
                 <KeyboardAvoidingView behavior='position' style={styles.root} enabled={true}>
                     <Header style={styles.Header}>
@@ -145,6 +148,7 @@ export default class RecordScreen extends Component {
                         <CheckBox checked={this.state.chechBoxOne}
                             onPress={this.chechBoxOnePress}
                             style={styles.CheckBox}
+                            
 
                         />
                         <Body>
@@ -161,7 +165,9 @@ export default class RecordScreen extends Component {
 
                     <Button style={styles.Button}
                         onPress={() => {
-                            this.addDailyRecord();
+                            this.passNICToAnotherScreen(nic)
+                            this.addDailyRecord(nic);
+                            
                         }}
                     >
                         <Text>Add</Text>
@@ -177,15 +183,15 @@ export default class RecordScreen extends Component {
                             <Icon name="apps" style={styles.Icon} />
                             <Text style={styles.Icon}>Apps</Text>
                         </Button>
-                        <Button vertical onPress={()=>this.props.navigation.navigate('ExpensesScren',{nic:'udara'})}>
+                        <Button vertical onPress={()=>this.props.navigation.navigate('ExpensesScren',{nic:nic})}>
                             <Icon name="camera" style={styles.Icon} />
                             <Text style={styles.Icon}>Camera</Text>
                         </Button>
-                        <Button vertical  onPress={()=>this.props.navigation.navigate('RecordScreen',{nic:'udara'})}>
+                        <Button vertical  onPress={()=>this.props.navigation.navigate('RecordScreen',{nic:nic})}>
                             <Icon  name="navigate"  style={styles.Icon}/>
                             <Text style={styles.Icon}>Navigate</Text>
                         </Button>
-                        <Button vertical onPress={()=>this.props.navigation.navigate('AccountScreen',{nic:'udara'})}>
+                        <Button vertical onPress={()=>this.props.navigation.navigate('AccountScreen',{nic:nic})}>
                             <Icon name="person"style={styles.Icon} />
                             <Text style={styles.Icon}>Contact</Text>
                         </Button>

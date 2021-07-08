@@ -19,7 +19,7 @@ export default class LoginScreen extends Component {
         this.getData()
     }
 
-
+    
     storeData = async (value) => {
         try {
             await AsyncStorage.setItem('isLogged', this.state.nic)
@@ -59,13 +59,14 @@ export default class LoginScreen extends Component {
 
     }
 
+
     passwordMatch(password) {
         if (this.state.password == password) {
             console.log('wade goda')
             this.storeData()
-            this.props.navigation.navigate(DefultScreen)
+            //this.props.navigation.navigate(DefultScreen)
             //this.props.navigation.navigate('ReportScreen',{nic:this.state.nic})
-
+            this.props.navigation.navigate('ReportScreen', { nic: this.state.nic })
         } else {
             console.log('nop')
         }

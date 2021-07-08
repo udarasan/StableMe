@@ -3,20 +3,25 @@ import { View, StyleSheet, StatusBar } from 'react-native'
 import { Container, Header, Content, Footer, FooterTab, Button, Body, Title, Icon, Text } from 'native-base';
 import LoginScreen from './LoginScreen';
 
+
 export default class ReportScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            nic: ''
         }
     }
+    passNICToAnotherScreen(pass) {
+        console.log(pass+" - pass data");
+    }
+    componentDidMount() {
 
 
+    }
     render() {
-        const {nic}=this.props.route.params
+        const { nic } = this.props.route.params
+        
         return (
-
-
             <Container>
 
                 <Header style={styles.Header}>
@@ -26,24 +31,24 @@ export default class ReportScreen extends Component {
                     </Body>
                 </Header>
                 <Content>
-                <Text>{nic}</Text>
+                    <Text>{nic}</Text>
                 </Content>
                 <Footer >
                     <FooterTab style={styles.Footer}>
-                        <Button vertical onPress={()=>this.props.navigation.navigate('ReportScreen')}>
+                        <Button vertical onPress={() => this.props.navigation.navigate('ReportScreen'),this.passNICToAnotherScreen(nic)}>
                             <Icon name="apps" style={styles.Icon} />
                             <Text style={styles.Icon}>Report</Text>
                         </Button>
-                        <Button vertical onPress={()=>this.props.navigation.navigate('ExpensesScren',{nic:'udara'})}>
-                            <Icon name="camera" style={styles.Icon}/>
+                        <Button vertical onPress={() => this.props.navigation.navigate('ExpensesScren', { nic: nic })}>
+                            <Icon name="camera" style={styles.Icon} />
                             <Text style={styles.Icon}>Expenses</Text>
                         </Button>
-                        <Button vertical  onPress={()=>this.props.navigation.navigate('RecordScreen',{nic:'udara'})}>
-                            <Icon  name="navigate"style={styles.Icon} />
+                        <Button vertical onPress={() => this.props.navigation.navigate('RecordScreen', { nic: nic })}>
+                            <Icon name="navigate" style={styles.Icon} />
                             <Text style={styles.Icon}>Record</Text>
                         </Button>
-                        <Button vertical onPress={()=>this.props.navigation.navigate('AccountScreen',{nic:'udara'})}>
-                            <Icon name="person" style={styles.Icon}/>
+                        <Button vertical onPress={() => this.props.navigation.navigate('AccountScreen', { nic: nic })}>
+                            <Icon name="person" style={styles.Icon} />
                             <Text style={styles.Icon}>Account</Text>
                         </Button>
                     </FooterTab>
@@ -72,11 +77,11 @@ const styles = StyleSheet.create({
 
     },
     Footer: {
-        
+
         backgroundColor: '#16DB65',
     },
     Icon: {
-        
+
         color: '#fff',
     }
 })
