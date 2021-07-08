@@ -18,13 +18,24 @@ export default class RecordScreen extends Component {
             uid: '',
             category: '',
             value: '',
-            date: new Date().toLocaleString(),
+            date:null,
             descrpiton: ''
 
         }
 
     }
-    
+    componentDidMount() {
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+
+        var todayo = mm + '/' + dd + '/' + yyyy;
+        this.setState({
+            date:todayo
+        })
+        console.log(todayo);
+    }
     chechBoxOnePress = () => {
         this.setState({
             chechBoxOne: true,
@@ -77,7 +88,7 @@ export default class RecordScreen extends Component {
     render() {
         return (
 
-            <View>
+            <Container>
                 <KeyboardAvoidingView behavior='position' style={styles.root} enabled={true}>
                     <Header style={styles.Header}>
                         <StatusBar backgroundColor="#16DB65" />
@@ -156,7 +167,32 @@ export default class RecordScreen extends Component {
                         <Text>Add</Text>
                     </Button>
                 </KeyboardAvoidingView>
-            </View>
+
+                <Content>
+                
+                </Content>
+                <Footer>
+                    <FooterTab style={styles.Footer}>
+                        <Button  vertical  onPress={()=>this.props.navigation.navigate('ReportScreen')}>
+                            <Icon name="apps" style={styles.Icon} />
+                            <Text style={styles.Icon}>Apps</Text>
+                        </Button>
+                        <Button vertical onPress={()=>this.props.navigation.navigate('ExpensesScren',{nic:'udara'})}>
+                            <Icon name="camera" style={styles.Icon} />
+                            <Text style={styles.Icon}>Camera</Text>
+                        </Button>
+                        <Button vertical  onPress={()=>this.props.navigation.navigate('RecordScreen',{nic:'udara'})}>
+                            <Icon  name="navigate"  style={styles.Icon}/>
+                            <Text style={styles.Icon}>Navigate</Text>
+                        </Button>
+                        <Button vertical onPress={()=>this.props.navigation.navigate('AccountScreen',{nic:'udara'})}>
+                            <Icon name="person"style={styles.Icon} />
+                            <Text style={styles.Icon}>Contact</Text>
+                        </Button>
+                    </FooterTab>
+                </Footer>
+
+            </Container>
 
         )
     }
@@ -222,5 +258,13 @@ const styles = StyleSheet.create({
     },
     root: {
         paddingBottom: 100
+    },
+    Footer: {
+        
+        backgroundColor: '#16DB65',
+    },
+    Icon: {
+        
+        color: '#fff',
     }
 })

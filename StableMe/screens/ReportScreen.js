@@ -1,24 +1,56 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, StatusBar } from 'react-native'
-import { Container, Header, Left, Body, Right, Title } from 'native-base';
+import { View, StyleSheet, StatusBar } from 'react-native'
+import { Container, Header, Content, Footer, FooterTab, Button, Body, Title, Icon, Text } from 'native-base';
 import LoginScreen from './LoginScreen';
+
 export default class ReportScreen extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+
+        }
+    }
+
 
     render() {
-       
+        const {nic}=this.props.route.params
         return (
-            <View>
+
+
+            <Container>
+
                 <Header style={styles.Header}>
                     <StatusBar backgroundColor="#16DB65" />
                     <Body>
                         <Title style={styles.Title}>Report Screen</Title>
                     </Body>
                 </Header>
-                <Text style={styles.Pagetitle}>
-                    
-                </Text>
+                <Content>
+                <Text>{nic}</Text>
+                </Content>
+                <Footer >
+                    <FooterTab style={styles.Footer}>
+                        <Button vertical onPress={()=>this.props.navigation.navigate('ReportScreen')}>
+                            <Icon name="apps" style={styles.Icon} />
+                            <Text style={styles.Icon}>Report</Text>
+                        </Button>
+                        <Button vertical onPress={()=>this.props.navigation.navigate('ExpensesScren',{nic:'udara'})}>
+                            <Icon name="camera" style={styles.Icon}/>
+                            <Text style={styles.Icon}>Expenses</Text>
+                        </Button>
+                        <Button vertical  onPress={()=>this.props.navigation.navigate('RecordScreen',{nic:'udara'})}>
+                            <Icon  name="navigate"style={styles.Icon} />
+                            <Text style={styles.Icon}>Record</Text>
+                        </Button>
+                        <Button vertical onPress={()=>this.props.navigation.navigate('AccountScreen',{nic:'udara'})}>
+                            <Icon name="person" style={styles.Icon}/>
+                            <Text style={styles.Icon}>Account</Text>
+                        </Button>
+                    </FooterTab>
+                </Footer>
 
-            </View>
+
+            </Container>
         )
     }
 }
@@ -38,5 +70,13 @@ const styles = StyleSheet.create({
         fontSize: 24,
         marginBottom: 20
 
+    },
+    Footer: {
+        
+        backgroundColor: '#16DB65',
+    },
+    Icon: {
+        
+        color: '#fff',
     }
 })

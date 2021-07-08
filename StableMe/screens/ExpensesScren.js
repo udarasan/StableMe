@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, StatusBar, FlatList, ScrollView, SafeAreaView, RefreshControl } from 'react-native'
-import { Container, Header, Content, List, ListItem, Thumbnail, CardItem, Text, Left, Body, Right, Button, Title } from 'native-base';
+import { Container, Header, Content, List, ListItem, Thumbnail, CardItem, Text, Left, Body, Right, Button, Title,Footer,FooterTab,Icon } from 'native-base';
 
 
 export default class ExpensesScren extends Component {
@@ -80,15 +80,31 @@ export default class ExpensesScren extends Component {
             }
             keyExtractor={(item, index) => index.toString()}
           />
-
+          <Content>
+                
+                </Content>
+                <Footer >
+                    <FooterTab style={styles.Footer}>
+                        <Button vertical  onPress={()=>this.props.navigation.navigate('ReportScreen')}>
+                            <Icon name="apps"style={styles.Icon} />
+                            <Text style={styles.Icon}>Report</Text>
+                        </Button>
+                        <Button vertical onPress={()=>this.props.navigation.navigate('ExpensesScren',{nic:'udara'})}>
+                            <Icon name="camera" style={styles.Icon}/>
+                            <Text style={styles.Icon}>Expenses</Text>
+                        </Button>
+                        <Button vertical  onPress={()=>this.props.navigation.navigate('RecordScreen',{nic:'udara'})}>
+                            <Icon  name="navigate" style={styles.Icon} />
+                            <Text style={styles.Icon}>Record</Text>
+                        </Button>
+                        <Button vertical onPress={()=>this.props.navigation.navigate('AccountScreen',{nic:'udara'})}>
+                            <Icon name="person" style={styles.Icon}/>
+                            <Text style={styles.Icon}>Account</Text>
+                        </Button>
+                    </FooterTab>
+                </Footer>
         </View>
       </Container>
-
-
-
-
-
-
 
     )
   }
@@ -133,13 +149,12 @@ const styles = StyleSheet.create({
 
     flexDirection: 'row',
     left: 215,
-    color: '#2f3542'
+    color: '#2f3542',
+    
   },
   Value: {
     fontSize: 35,
     color: '#05c46b'
-
-
 
   },
   Type: {
@@ -159,4 +174,12 @@ const styles = StyleSheet.create({
     color: '#2f3542'
 
   },
+    Footer: {
+        
+        backgroundColor: '#16DB65',
+    },
+    Icon: {
+        
+        color: '#fff',
+    }
 })

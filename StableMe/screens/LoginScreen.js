@@ -10,13 +10,15 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export default class LoginScreen extends Component {
 
     constructor(props) {
-        super()
+        super(props)
         this.state = {
             nic: '',
-            password: ''
+            password: '',
+
         }
         this.getData()
     }
+
 
     storeData = async (value) => {
         try {
@@ -31,7 +33,8 @@ export default class LoginScreen extends Component {
             const value = await AsyncStorage.getItem('isLogged')
             if (value !== null) {
                 console.log('getData :' + value)
-                this.props.navigation.navigate(DefultScreen)
+
+                this.props.navigation.navigate('ReportScreen', { nic: value })
 
             } else {
 
@@ -78,6 +81,8 @@ export default class LoginScreen extends Component {
         return (
 
             <View>
+
+
                 <Header style={styles.Header}>
                     <StatusBar backgroundColor="#16DB65" />
                     <Body>
@@ -132,7 +137,9 @@ export default class LoginScreen extends Component {
                 </Button>
 
                 <Text style={styles.NormalText}> Forgot Password </Text>
+
             </View>
+
 
         )
     }

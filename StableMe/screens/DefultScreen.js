@@ -17,10 +17,10 @@ export default class DefultScreen extends Component {
     
     render() {
         
-        
+       
         return (
             
-          
+            
             <Tab.Navigator tabBarOptions={{
                 showLabel: false,
                 style: {
@@ -38,6 +38,7 @@ export default class DefultScreen extends Component {
                             </View>
                         ),
                     }
+                    
                 } />
                 <Tab.Screen name="ExpensesScren" component={ExpensesScren}
                     options={
