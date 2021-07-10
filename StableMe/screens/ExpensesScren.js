@@ -14,6 +14,7 @@ export default class ExpensesScren extends Component {
     }
     this.getData()
   }
+
   scrollToTopAndRefresh() {
     this.flatlistref.scrollToOffset({ y: 0, animated: true });
     this.setState({ refreshing: true }, this.doRefresh);
@@ -22,12 +23,12 @@ export default class ExpensesScren extends Component {
   doRefresh() {
     console.log('dsds')
     this.getData()
-    setTimeout(() => this.setState({ refreshing: false }), 1000);
+    setTimeout(() => this.setState({ refreshing: false }), 10);
   }
 
   getData(nic) {
 
-    return fetch('http://192.168.1.113:3000/exchange/oneexchange/' + nic)
+    return fetch('http://192.168.1.104:3000/exchange/oneexchange/' + nic)
       .then((response) => response.json())
       .then((responseJson) => {
 

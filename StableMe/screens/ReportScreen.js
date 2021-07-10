@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, StatusBar } from 'react-native'
+import { View, StyleSheet, StatusBar, Image } from 'react-native'
 import { Card, CardItem, Container, Header, Content, Footer, FooterTab, Button, Body, Title, Icon, Text } from 'native-base';
 import LoginScreen from './LoginScreen';
 
@@ -15,10 +15,10 @@ export default class ReportScreen extends Component {
     }
     passNICToAnotherScreen(pass) {
         console.log(pass + " - pass data");
-        fetch('http://192.168.1.113:3000/user/oneuser/' + pass, { method: 'GET' })
+        fetch('http://192.168.1.104:3000/user/oneuser/' + pass, { method: 'GET' })
             .then((response) => response.json())
             .then((json) => console.log(json))
-            
+
     }
     componentDidMount() {
 
@@ -37,8 +37,8 @@ export default class ReportScreen extends Component {
                     </Body>
                 </Header>
                 <Content>
-                    
-                    <Card style={styles.Card}>
+
+                   
                         <CardItem style={styles.CardItem}>
                             <Body>
                                 <Text>
@@ -49,9 +49,14 @@ export default class ReportScreen extends Component {
                                 </Text>
                             </Body>
                         </CardItem>
-                    </Card>
+                    
+                    <Image
+                    source={require('../assests/erer.png')}
+                    style={styles.ImageReport}
+                />
 
                 </Content>
+                
                 <Footer >
                     <FooterTab style={styles.Footer}>
                         <Button vertical onPress={() => this.props.navigation.navigate('ReportScreen'), this.passNICToAnotherScreen(nic)}>
@@ -104,19 +109,20 @@ const styles = StyleSheet.create({
         color: '#fff',
     },
     CardItem: {
-        
-       
 
     },
-    Card:{
-        borderRadius: 10,
-        color: '#fff',
-        borderWidth:1,
-        height:100,
+    Card: {
         
+
     },
-    Welcome:{
-        fontSize:25
+    Welcome: {
+        fontSize: 25
+    },
+    ImageReport:{
+        marginTop:50,
+        width:200,
+        height:200,
+        marginLeft:70,
     }
 
 })

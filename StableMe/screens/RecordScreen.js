@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, StatusBar, KeyboardAvoidingView } from 'react-native'
+import { View, StyleSheet, StatusBar, KeyboardAvoidingView,Image } from 'react-native'
 import { Container, Header, Title, Content, Footer, FooterTab, ActionSheet, DatePicker, Button, Left, Right, Body, Icon, Text, Item, Input, ListItem, CheckBox } from 'native-base';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -63,7 +63,7 @@ export default class RecordScreen extends Component {
 
     }
     addDailyRecord(nic) {
-        fetch('http://192.168.1.113:3000/exchange/saveexchange', {
+        fetch('http://192.168.1.104:3000/exchange/saveexchange', {
             method: 'POST',
             body: JSON.stringify({
 
@@ -82,12 +82,24 @@ export default class RecordScreen extends Component {
         })
             .then((response) => response.json())
             .then((json) => console.log(json));
+            alert("Record Added Successfuly"),
+            this.clear()
+            
+
     }
     passNICToAnotherScreen(pass) {
         console.log(pass+" - pass data");
         
     }
-
+    clear () {
+        this.setState({
+            category: '',
+            value: '',
+            descrpiton: '',
+            chechBoxOne: false,
+            chechBoxTwo: false,
+        });
+    }
     render() {
         const { nic } = this.props.route.params
         return (
@@ -99,6 +111,11 @@ export default class RecordScreen extends Component {
                             <Title style={styles.Title}>Record Screen</Title>
                         </Body>
                     </Header>
+                    <Image
+                    source={require('../assests/undraw_Add_files_re_v09g.png')}
+                    style={styles.ImageReport}
+                />
+                   
                     <Text style={styles.TopTitle}> Daily Record </Text>
 
                     <Item rounded style={styles.InputFeilds}>
@@ -167,7 +184,6 @@ export default class RecordScreen extends Component {
                         onPress={() => {
                             this.passNICToAnotherScreen(nic)
                             this.addDailyRecord(nic);
-                            
                         }}
                     >
                         <Text>Add</Text>
@@ -238,7 +254,7 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         paddingLeft: 100,
         paddingRight: 100,
-        marginTop: 20,
+        marginTop: 10,
         marginLeft: 50,
         marginRight: 50,
 
@@ -258,12 +274,12 @@ const styles = StyleSheet.create({
 
     },
     TopTitle: {
-        marginTop: 30,
+        marginTop: 0,
         marginBottom: 10,
         marginLeft: 120,
     },
     root: {
-        paddingBottom: 100
+        paddingBottom: 95
     },
     Footer: {
         
@@ -272,5 +288,11 @@ const styles = StyleSheet.create({
     Icon: {
         
         color: '#fff',
+    },
+    ImageReport:{
+        marginTop:10,
+        width:100,
+        height:100,
+        marginLeft:110,
     }
 })

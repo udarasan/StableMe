@@ -43,17 +43,11 @@ export default class LoginScreen extends Component {
 
         }
     }
-    removeValue = async () => {
-        try {
-            await AsyncStorage.removeItem('isLogged')
-        } catch (e) {
-            // remove error
-        }
 
-        console.log('Done.')
-    }
+
+
     getUser = () => {
-        fetch('http://192.168.1.113:3000/user/oneuser/' + this.state.nic, { method: 'GET' })
+        fetch('http://192.168.1.104:3000/user/oneuser/' + this.state.nic, { method: 'GET' })
             .then((response) => response.json())
             .then((json) => this.passwordMatch(json.password))
 
@@ -82,63 +76,64 @@ export default class LoginScreen extends Component {
         return (
 
             <View>
+                <KeyboardAvoidingView behavior='position' style={styles.root} enabled={true}>
 
+                    <Header style={styles.Header}>
+                        <StatusBar backgroundColor="#16DB65" />
+                        <Body>
+                            <Title style={styles.Title}>StableMe</Title>
+                        </Body>
+                    </Header>
+                    <Text style={styles.Pagetitle}>
+                        Login
+                    </Text>
+                    <Item rounded style={styles.InputFeilds}>
+                        <Input
+                            placeholder='National ID'
+                            style={styles.New}
+                            value={this.state.nic}
+                            type="text"
+                            name="nic"
+                            onChangeText={(value) => {
+                                this.setState({
+                                    nic: value
+                                })
+                            }}
 
-                <Header style={styles.Header}>
-                    <StatusBar backgroundColor="#16DB65" />
-                    <Body>
-                        <Title style={styles.Title}>StableMe</Title>
-                    </Body>
-                </Header>
-                <Text style={styles.Pagetitle}>
-                    Login
-                </Text>
-                <Item rounded style={styles.InputFeilds}>
-                    <Input
-                        placeholder='National ID'
-                        style={styles.New}
-                        value={this.state.nic}
-                        type="text"
-                        name="nic"
-                        onChangeText={(value) => {
-                            this.setState({
-                                nic: value
-                            })
-                        }}
+                        />
+                    </Item>
+                    <Item rounded style={styles.InputFeilds}>
+                        <Input
+                            placeholder='Password'
+                            style={styles.New}
+                            value={this.state.password}
+                            secureTextEntry={true}
+                            type="text"
+                            name="password"
+                            onChangeText={(value) => {
+                                this.setState({
+                                    password: value
+                                })
+                            }}
+                        />
+                    </Item>
+                    <Button style={styles.Button}
+                        onPress={this.getUser}
 
-                    />
-                </Item>
-                <Item rounded style={styles.InputFeilds}>
-                    <Input
-                        placeholder='Password'
-                        style={styles.New}
-                        value={this.state.password}
-                        type="text"
-                        name="password"
-                        onChangeText={(value) => {
-                            this.setState({
-                                password: value
-                            })
-                        }}
-                    />
-                </Item>
-                <Button style={styles.Button}
-                    onPress={this.getUser}
+                    >
+                        <Text style={styles.ButtonText}> Login </Text>
+                    </Button>
 
-                >
-                    <Text style={styles.ButtonText}> Login </Text>
-                </Button>
+                    <Button style={styles.ButtonC}
+                        onPress={this.getSignup}
+                    //onPress={()=>this.props.navigation.navigate('ReportScreen',{nic:"hello"})}
 
-                <Button style={styles.Button}
-                    onPress={this.getSignup}
-                //onPress={()=>this.props.navigation.navigate('ReportScreen',{nic:"hello"})}
+                    >
+                        <Text style={styles.ButtonTextC}> Create Account </Text>
+                    </Button>
 
-                >
-                    <Text style={styles.ButtonText}> sign </Text>
-                </Button>
-
-                <Text style={styles.NormalText}> Forgot Password </Text>
-
+                    <Text style={styles.NormalText}> Forgot Password </Text>
+                </KeyboardAvoidingView>
             </View>
 
 
@@ -190,8 +185,25 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginTop: 5,
         color: 'grey'
-    }
+    },
+    ButtonC: {
+        backgroundColor: '#f1f2f6',
+        borderRadius: 50,
+        paddingLeft: 50,
+        paddingRight: 50,
+        marginTop: 8,
+        marginLeft: 50,
+        marginRight: 50,
 
+    },
+    ButtonTextC: {
+        color: '#747d8c',
+        fontWeight: 'bold'
+    }
+    ,
+    root: {
+        paddingBottom: 55
+    },
 
 
 })

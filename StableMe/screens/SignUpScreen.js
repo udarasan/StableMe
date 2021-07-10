@@ -3,6 +3,7 @@ import { View, StyleSheet, StatusBar, KeyboardAvoidingView, Pressable } from 're
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text, Item, Input } from 'native-base';
 import LoginScreen from './LoginScreen';
 
+
 class SignUpScreen extends Component {
     constructor() {
         super()
@@ -15,7 +16,7 @@ class SignUpScreen extends Component {
     }
 
     saveCustomer = () => {
-        fetch('http://192.168.1.113:3000/user/saveuser', {
+        fetch('http://192.168.1.104:3000/user/saveuser', {
             method: 'POST',
             body: JSON.stringify({
                 nic: this.state.nic,
@@ -30,17 +31,29 @@ class SignUpScreen extends Component {
         })
             .then((response) => response.json())
             .then((json) => console.log(json));
+            alert("Succecfuly Created Account!");
+            this.clear
+            this.props.navigation.navigate('LoginScreen')
 
 
     }
     getData() {
-        fetch('http://192.168.1.113:3000/user', { method: 'GET' })
+        fetch('http://192.168.1.104:3000/user', { method: 'GET' })
             .then((response) => response.json())
             .then((json) => console.log(json))
+            
     }
 
     loginPage=()=>{
         this.props.navigation.navigate(LoginScreen)
+    }
+    clear = () => {
+        this.setState({
+            nic: "",
+            name: "",
+            email: "",
+            password: ""
+        });
     }
 
     render() {
@@ -54,7 +67,7 @@ class SignUpScreen extends Component {
                         </Body>
                     </Header>
                     <Text style={styles.Pagetitle}>
-                        Sign Up
+                        Create Account
                     </Text>
                     <Item rounded style={styles.InputFeilds}>
                         <Input
@@ -115,16 +128,17 @@ class SignUpScreen extends Component {
                     <Button style={styles.Button}
                         onPress={this.saveCustomer}
                         type="submit"
+                        
 
                     >
                         <Text style={styles.ButtonText} > Create Account </Text>
                     </Button>
 
-                    <Button style={styles.Button}
+                    <Button style={styles.ButtonC}
                         onPress={this.loginPage}
 
                     >
-                        <Text style={styles.ButtonText} > Login </Text>
+                        <Text style={styles.ButtonTextC} > Login </Text>
                     </Button>
                     
                 </KeyboardAvoidingView>
@@ -136,7 +150,7 @@ class SignUpScreen extends Component {
 
 const styles = StyleSheet.create({
     root: {
-        paddingBottom: 40
+        paddingBottom: 60
     },
     Title: {
         fontSize: 20,
@@ -179,6 +193,20 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
 
+    ButtonC: {
+        backgroundColor: '#f1f2f6',
+        borderRadius: 50,
+        paddingLeft: 90,
+        paddingRight: 90,
+        marginTop: 8,
+        marginLeft: 50,
+        marginRight: 50,
+
+    },
+    ButtonTextC: {
+        color: '#747d8c',
+        fontWeight: 'bold'
+    }
 
 })
 
