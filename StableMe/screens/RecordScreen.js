@@ -197,7 +197,7 @@ export default class RecordScreen extends Component {
                     <FooterTab style={styles.Footer}>
                         <Button  vertical  onPress={()=>this.props.navigation.navigate('ReportScreen')}>
                             <Icon name="apps" style={styles.Icon} />
-                            <Text style={styles.Icon}>Apps</Text>
+                            <Text style={styles.Icon}>Report</Text>
                         </Button>
                         <Button vertical onPress={()=>this.props.navigation.navigate('ExpensesScren',{nic:nic})}>
                             <Icon name="expand" style={styles.Icon} />
@@ -205,11 +205,11 @@ export default class RecordScreen extends Component {
                         </Button>
                         <Button vertical  onPress={()=>this.props.navigation.navigate('RecordScreen',{nic:nic})}>
                             <Icon  name="navigate"  style={styles.Icon}/>
-                            <Text style={styles.Icon}>Navigate</Text>
+                            <Text style={styles.Icon}>rECORD</Text>
                         </Button>
                         <Button vertical onPress={()=>this.props.navigation.navigate('AccountScreen',{nic:nic})}>
                             <Icon name="person"style={styles.Icon} />
-                            <Text style={styles.Icon}>Contact</Text>
+                            <Text style={styles.Icon}>Account</Text>
                         </Button>
                     </FooterTab>
                 </Footer>

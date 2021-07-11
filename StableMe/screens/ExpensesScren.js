@@ -12,7 +12,9 @@ export default class ExpensesScren extends Component {
       isLoading: true,
       refreshing: false,
     }
-    this.getData()
+    const { nic } = this.props.route.params
+    this.getData(nic)
+
   }
 
   scrollToTopAndRefresh() {
@@ -22,7 +24,7 @@ export default class ExpensesScren extends Component {
 
   doRefresh() {
     console.log('dsds')
-    this.getData()
+    this.getData
     setTimeout(() => this.setState({ refreshing: false }), 10);
   }
 
@@ -91,7 +93,7 @@ export default class ExpensesScren extends Component {
                 <Icon name="apps" style={styles.Icon} />
                 <Text style={styles.Icon}>Report</Text>
               </Button>
-              <Button vertical onPress={() => this.props.navigation.navigate('ExpensesScren', { nic: nic }), this.getData(nic)}>
+              <Button vertical onPress={() => this.props.navigation.navigate('ExpensesScren', { nic: nic })}>
                 <Icon name="expand" style={styles.Icon} />
                 <Text style={styles.Icon}>Exchange</Text>
               </Button>

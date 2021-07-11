@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import { View, StyleSheet, StatusBar, Image } from 'react-native'
+import React, { Component ,useState} from 'react'
+import { View, StyleSheet, StatusBar, Image, RefreshControl, ScrollView } from 'react-native'
 import { Card, CardItem, Container, Header, Content, Footer, FooterTab, Button, Body, Title, Icon, Text } from 'native-base';
-import LoginScreen from './LoginScreen';
+
 
 
 export default class ReportScreen extends Component {
@@ -12,24 +12,42 @@ export default class ReportScreen extends Component {
             name: '',
 
         }
+this.doRefresh()
+        
+
+        
     }
-    passNICToAnotherScreen(pass) {
-        console.log(pass + " - pass data");
-        fetch('http://192.168.1.104:3000/user/oneuser/' + pass, { method: 'GET' })
+
+doRefresh=()=>{
+    const { nic } = this.props.route.params
+    this.getExpense(nic)
+    this.getIncome(nic)
+}
+
+    getIncome(nic) {
+        fetch('http://192.168.1.104:3000/exchange/incexpenses/' + nic, { method: 'GET' })
             .then((response) => response.json())
-            .then((json) => console.log(json))
+            .then((json) => this.setState({
+                displayname1: (json[0].total)
+            }))
 
     }
-    componentDidMount() {
-
+    getExpense(nic) {
+        fetch('http://192.168.1.104:3000/exchange/exexpenses/' + nic, { method: 'GET' })
+            .then((response) => response.json())
+            .then((json) => this.setState({
+                displayname2: (json[0].total)
+            }))
 
     }
+
+
     render() {
         const { nic } = this.props.route.params
-
+        
         return (
-            <Container>
 
+            <Container>
                 <Header style={styles.Header}>
                     <StatusBar backgroundColor="#16DB65" />
                     <Body>
@@ -37,29 +55,40 @@ export default class ReportScreen extends Component {
                     </Body>
                 </Header>
                 <Content>
+                    <CardItem style={styles.CardItem}>
+                        <Body>
+                            <Text>
+                                Your ID : {nic}
+                            </Text>
+                            <Text style={styles.Welcome}>
+                                Hello There! Welcome To Statble Me
+                            </Text>
+                            <Image
+                                source={require('../assests/erer.png')}
+                                style={styles.ImageReport}
+                            />
+                        </Body>
 
-                   
-                        <CardItem style={styles.CardItem}>
-                            <Body>
-                                <Text>
-                                    Your ID : {nic}
-                                </Text>
-                                <Text style={styles.Welcome}>
-                                    Hello There! Welcome To Statble Me
-                                </Text>
-                            </Body>
-                        </CardItem>
-                    
-                    <Image
-                    source={require('../assests/erer.png')}
-                    style={styles.ImageReport}
-                />
+                    </CardItem>
+                    <Body style={styles.Body1}>
+                        <Text>Income </Text>
+                        <Text style={styles.TextSize}>Rs :{this.state.displayname2} </Text>
+                    </Body>
 
+                    <Body style={styles.Body2}>
+                        <Text>Expense </Text>
+                        <Text style={styles.TextSize}>Rs :{this.state.displayname1} </Text>
+                    </Body>
+                    <Button style={styles.Button5} onPress={() => {
+                            this.doRefresh()
+                        }} >
+                        <Text>Refresh</Text>
+                    </Button>
                 </Content>
-                
+
                 <Footer >
                     <FooterTab style={styles.Footer}>
-                        <Button vertical onPress={() => this.props.navigation.navigate('ReportScreen'), this.passNICToAnotherScreen(nic)}>
+                        <Button vertical onPress={() => this.props.navigation.navigate('ReportScreen')}>
                             <Icon name="apps" style={styles.Icon} />
                             <Text style={styles.Icon}>Report</Text>
                         </Button>
@@ -79,7 +108,10 @@ export default class ReportScreen extends Component {
                 </Footer>
 
 
+
+
             </Container>
+
         )
     }
 }
@@ -111,18 +143,52 @@ const styles = StyleSheet.create({
     CardItem: {
 
     },
-    Card: {
-        
+    Button5: {
+        backgroundColor: '#16DB65',
+        borderRadius:10,
+        left:130,
 
     },
     Welcome: {
         fontSize: 25
     },
-    ImageReport:{
-        marginTop:50,
-        width:200,
-        height:200,
-        marginLeft:70,
+    ImageReport: {
+        marginTop: 0,
+        width: 150,
+        height: 150,
+        marginLeft: 70,
+    },
+    Body1: {
+        backgroundColor: '#f5f5f5',
+        marginLeft: 13,
+        marginRight: 13,
+        marginBottom: 8,
+        padding: 13,
+        paddingLeft: 90,
+        paddingRight: 90,
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: '#05c46b'
+
+    },
+    Body2: {
+        backgroundColor: '#f5f5f5',
+        marginLeft: 13,
+        marginRight: 13,
+        marginBottom: 8,
+        padding: 13,
+        paddingLeft: 90,
+        paddingRight: 90,
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: '#05c46b'
+
+    },
+    TextSize: {
+        fontSize: 20,
+        fontStyle: 'normal',
+        fontWeight: 'bold',
+        
     }
 
 })

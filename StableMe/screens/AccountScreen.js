@@ -278,7 +278,7 @@ const styles = StyleSheet.create({
         height: 90,
         borderRadius: 100,
         marginTop: 10,
-        marginLeft:130
+        marginLeft: 130
 
     }
 

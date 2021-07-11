@@ -14,15 +14,19 @@ export default class LoginScreen extends Component {
         this.state = {
             nic: '',
             password: '',
+            tot: ''
 
         }
+
         this.getData()
+
     }
 
 
     storeData = async (value) => {
         try {
             await AsyncStorage.setItem('isLogged', this.state.nic)
+
             console.log('Store Data :' + value)
         } catch (e) {
             // saving error
@@ -31,10 +35,12 @@ export default class LoginScreen extends Component {
     getData = async () => {
         try {
             const value = await AsyncStorage.getItem('isLogged')
+
             if (value !== null) {
                 console.log('getData :' + value)
+                
 
-                this.props.navigation.navigate('ReportScreen', { nic: value })
+                this.props.navigation.navigate('ReportScreen', { nic: value,  })
 
             } else {
 
@@ -44,7 +50,9 @@ export default class LoginScreen extends Component {
         }
     }
 
-
+    componentDidMount() {
+        console.log(this.state.tot + 'udar');
+    }
 
     getUser = () => {
         fetch('http://192.168.1.104:3000/user/oneuser/' + this.state.nic, { method: 'GET' })
@@ -52,12 +60,30 @@ export default class LoginScreen extends Component {
             .then((json) => this.passwordMatch(json.password))
 
     }
+    valueSet(total) {
+        console.log(total + "pl");
+        this.setState({ tot: total })
+        console.log(this.state.tot);
+
+    }
+    // getUserExpense(nic) {
+
+    //     console.log('oop');
+    //     fetch('http://192.168.1.104:3000/exchange/incexpenses/' + nic, { method: 'GET' })
+    //         .then((response) => response.json())
+    //         .then((json) => this.valueSet((json[0].total))
+
+    //         )
+
+    // }
+
 
 
     passwordMatch(password) {
         if (this.state.password == password) {
             console.log('wade goda')
             this.storeData()
+
             //this.props.navigation.navigate(DefultScreen)
             //this.props.navigation.navigate('ReportScreen',{nic:this.state.nic})
             this.props.navigation.navigate('ReportScreen', { nic: this.state.nic })
